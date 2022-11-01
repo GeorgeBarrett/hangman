@@ -4,8 +4,8 @@ import string
 
 def get_valid_word(words):
     word = random.choice(words) # randomly choses a word from words.py  
-    while '-' or ' ' in word:
-        word = random.choice(word)
+    while '-' in word or ' ' in word:
+        word = random.choice(words)
     
     return word.upper()
 
@@ -17,24 +17,25 @@ def hangman():
 
     while len(word_letters) > 0:
 
-        print('You have already used the letters:', ''.join(used_letters)) # letters used
+        print('You have already used the letters:', ' '.join(used_letters)) # letters used
 
-        word_list = [letter if letter in used_letters else '' for letter in word] # location of the current word
-        print('Current word: ', ''.join(word_list))
+        word_list = [letter if letter in used_letters else '-' for letter in word] # location of the current word
+        print('Current word: ', ' '.join(word_list))
 
 
-        user_letter = input('Guess a letter:').uppercase() # getting user input
-        if user_input in alphabet - used_letters:
+        user_letter = input('Guess a letter: ').upper() # getting user input
+        if user_letter in alphabet - used_letters:
             used_letters.add(user_letter)
             if user_letter in word_letters:
                 word_letters.remove(user_letter)
         
         elif user_letter in used_letters:
-            print('You have already used this letter')
+            print('You have already selected this letter')
         
         else:
             print('Invalid character')
 
-user_input = input('Type something:')
-print(user_input)
+# user_input = input('Type something: ')
+# print(user_input)
 
+hangman()
